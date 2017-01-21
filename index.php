@@ -1,20 +1,21 @@
+
 <?php
+
 require_once("header.php");
+
 ?>
 <?php
 $msg="";
   if (isset($_POST['contact'],$_POST['password']) && !empty($_POST['contact']) && !empty($_POST['password']))
   {
-    echo("<script> inside</script>");
     $contact = $_POST['contact'];
     $password  = $_POST['password'];
-    $query = "SELECT uid,uname FROM users where contact='$contact' AND password='$password'";
-    $result = mysql_query($query);
-	  $result_num_rows = mysql_num_rows($result);
+    $result = $db->query("SELECT * FROM users WHERE contact = ':contact' AND password = ':password'",['contact'=>$contact,'password'=>$password])->fetch();
+    
   }
-  if (isset($result_num_rows) && isset($result))
+  if (isset($result))
   {
-    if($result_num_rows==0)
+    if(count($result)==0)
       $msg =  "Invalid Mobile Number/Password";
     else
     {
@@ -27,8 +28,10 @@ $msg="";
       {
         $exp_time = 0;
       }
-      setcookie("uid",mysql_result($result, 0,'uid'),$exp_time);
-      exit("<script>location.href = 'users.php'</script>");
+      //setcookie("uid",mysql_result($result, 0,'uid'),$exp_time);
+      //exit("<script>location.href = 'users.php'</script>");
+        $_SESSION['uid'] = $result['uid'];
+        header("Location: dashboard.php");
     }
 }
 ?>
