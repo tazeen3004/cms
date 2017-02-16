@@ -1,98 +1,85 @@
-
 <?php
 require_once("header.php");
-?>
-<?php
-$msg="";	 
-	
-   if(isset($_POST['submit']))
+$msg="";
+$msg1="";
+	if (isset($_POST['submit']))
 	{
-		
-		$connect=mysqli_connect("localhost","root");
-		$uname=mysqli_real_escape_string($connect,$_POST['uname']);
-		$email=mysqli_real_escape_string($connect,$_POST['email']);
-		$mobile=mysqli_real_escape_string($connect,$_POST['mobile']);
-		$password=mysqli_real_escape_string($connect,$_POST['password']);
-		$confirmpassword=mysqli_real_escape_string($connect,$_POST['confirmpassword']);
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if (empty($_POST["uname"])) {
-    $nameErr = "Name is required";
-  }
-
-	if (empty($_POST["email"])) {
-		$emailErr = "Email is required";
-	} 
-
-	if (empty($_POST["mobile"])) {
-		$mobileErr = "Mobile no required";
+		$ename= $_POST['ename'];
+	$contact= $_POST['contact'];
+	$password = $_POST['password'];  
+  $cpassword = $_POST['cpassword'];
+  $etype = $_POST['etype'];   
+  $salary = $_POST['salary']; 
+ 	if( !empty($_POST['ename']) && !empty($_POST['contact']) && !empty($_POST['password']) && !empty($_POST['cpassword']) && !empty($_POST['etype']) && !empty($_POST['salary']))
+  	{
+      if ($password == $cpassword)
+      {  
+		    $result = $db->insert('employee',['ename'=>$ename,'contact'=>$contact, 'password'=>$password, 'etype'=>$etype, 'salary'=>$salary] );
+    	  header("Location: dashboard.php");
+      }
+      else
+      {
+        $msg1 = "Passwords do not match";
+      }
+    }
+	else
+	{
+		$msg = "Please enter all values";
+	}	 	
 	}
-	if (empty($_POST["password"])) {
-    $passErr = "Password required";
-	} 
-
-	if ($_POST['password']!= $_POST['confirmpassword']) {
-		$conErr= "Error... Passwords do not match";
-	}
- 
-  
-}
-		mysqli_select_db($connect,"cms") or die("error");
-		if(!empty($_POST['uname'])&&!empty($_POST['email'])&&!empty($_POST['mobile'])&&!empty($_POST['password'])&& $_POST['password']!= $_POST['confirmpassword'])
-		{
-		mysqli_query($connect,"UPDATE users SET uname='$uname', email='$email', contact='$mobile', password='$password' WHERE uid='$uid'");
-		header("Location:profile.php");
-		}
-		mysqli_close($connect);	
-}
-
-
-
-
 ?>
 <div id="page-wrapper">
     <div class="container-fluid">
-		<div id="page-wrapper">
-            <div class="container-fluid">
-            	<div class="row">
-            		<div class="col-lg-12">
-                        <h1 class="page-header">
-                            Add Employee
-                        </h1> 
-                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                 Add Employee
+                </h1>                   
+            </div>  
+        </div>
+		
+		<div class="alert alert-danger"<?php if (isset($msg)){ echo 'style="display:none;"'; } ?> >
+                     <?php echo $msg;?>
                 </div>
-				<div class="jumbotron">
-					<form action="index.php" method="POST">
-  						<div class="form-group">
-       						<label for="name" style="font-size:21px;"> Full Name</label>
-  							<input type="name" class="form-control" name="name" placeholder="Full name"    >
-  						</div>
-  						<div class="form-group">
-       						<label for="contact" style="font-size:21px;">Mobile No</label>
-  							<input type="contact" class="form-control" name="contact" placeholder="Mobile No"    >
-  						</div>
-  						<div class="form-group">
-       						<label for="contact" style="font-size:21px;">Salary</label>
-  							<input type="contact" class="form-control" name="salary" placeholder="Salary"    >
-  						</div>
-  						<div class="form-group">
-       						<label for="contact" style="font-size:21px;">Password</label>
-  							<input type="contact" class="form-control" name="password" placeholder="Password"    >
-  						</div>
-  						
-  					</form>
-					<input type="submit" class="btn btn-primary btn-lg" value="Add">
+				
+		<form method="POST" role="form">
+        <div class="form-group">
+                                <label>Name :</label>
+                                <input name="ename"  class="form-control" placeholder="Enter Employee Name">
+                            </div>
+    	
+		<div class="form-group">
+                                <label>Mobile No :</label>
+                                <input name="contact"  class="form-control" placeholder="Enter Employee Mobile No.">
+                            </div>
+							<div class="form-group">
+                                <label>Employee Type</label>
+                                <select name="etype" class="form-control">
+                                    <option value="1">Manager</option>
+                                    <option value="2">Employee</option>
+                                   
+                                </select>
+                            </div>
+							<div class="form-group" >
+                                <label>Password :</label>
+                                <input name="password"  class="form-control" placeholder="Enter password" type="password">
+                            </div>
+							<div class="alert alert-danger"<?php if (isset($msg1)){ echo 'style="display:none;"'; } ?> >
+                    <?php echo $msg1;?>
                 </div>
-
-
-
-
-
-
-     	</div>
- 	</div>
+							<div class="form-group">
+                                <label>Confirm Password :</label>
+                                <input name="cpassword"  class="form-control" placeholder="Enter the same password as above" type="password">
+                            </div>
+							<div class="form-group">
+                                <label>Salary :</label>
+                                <input name="salary"  class="form-control" placeholder="Enter Employee salary ">
+                            </div>
+							<button name="submit" type="submit" class="btn btn-lg btn-primary"><strong>Submit</strong></button>
+     </form>                    
+    </div>
 </div>
 
-
 <?php
-require_once("footer.php");
+require_once("footer.php")
 ?>
