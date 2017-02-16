@@ -17,7 +17,42 @@ require_once("header.php")
     $result = $db->findByCol('users','uid',$uid);
 	if($result['utype'] ==0)
 	{
-
+?>
+  <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-bar-chart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Today's Sales</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+							
+                        </div>
+                    </div>
+					 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Sales Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<?php					
 	}
 	else
 	{
@@ -54,8 +89,10 @@ require_once("header.php")
                                     <div class="clearfix"></div>
                                 </div>
                             </a>
+							
                         </div>
                     </div>
+					 
                                     <!-- /.row -->
 
                 <div class="row">
@@ -87,8 +124,7 @@ require_once("header.php")
 
     </div>
     <!-- /#wrapper -->
-
-
+ 
 <?php
 require_once("footer.php")
 ?>

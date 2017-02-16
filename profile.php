@@ -17,7 +17,7 @@ require_once("header.php");
         </div>
         <div class="panel-body" id="profile">
         	<div class="text-right">
- 			<button  class="btn btn-primary btn-lg " ><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-right:5px"></span> &nbsp;Edit &nbsp;</button>
+ 			<a href="profileedit.php"><button class="btn btn-primary btn-lg " ><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-right:5px"></span> &nbsp;Edit &nbsp;</button></a>
   			</div>
   			<br>
   			<div id="saved">
@@ -45,7 +45,6 @@ require_once("header.php");
     	</div>
     	
     </div>
-<div>
 <?php
 require_once("footer.php");
-?>
+?>	

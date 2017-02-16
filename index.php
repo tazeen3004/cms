@@ -29,7 +29,7 @@ $msg="";
         $exp_time = 0;
       }
       //setcookie("uid",mysql_result($result, 0,'uid'),$exp_time);
-      //exit("<script>location.href = 'users.php'</script>");
+    
         $_SESSION['uid'] = $result['uid'];
         header("Location: dashboard.php");
     }
