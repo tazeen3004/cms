@@ -1,5 +1,6 @@
 <?php
-    include_once('config.inc.php');
+    
+include_once('config.inc.php');
 include_once('Database.php');
 $db = new Database(DB_SERVER,DB_USER,DB_PASS,DB_DATABASE);
 ?>
@@ -54,8 +55,8 @@ $db = new Database(DB_SERVER,DB_USER,DB_PASS,DB_DATABASE);
 
     function loggedin()
     {
-            if (!empty($_SESSION['uid']))
-            return $_SESSION['uid'];
+            if (!empty($_SESSION['id']))
+            return $_SESSION['id'];
             else
             return false;
     } 
@@ -83,8 +84,8 @@ $db = new Database(DB_SERVER,DB_USER,DB_PASS,DB_DATABASE);
 }
 else      
 {
-    $uid =$_SESSION['uid'];
-               $result = $db->findByCol('users','uid',$uid);
+    $uid =$_SESSION['id'];
+               $result = $db->findByCol('users','id',$uid);
     ?>
      <ul class="nav navbar-right top-nav"  style="font-family:sans; color:white;">
          <li>   <h5> <i class="fa fa-user"></i> <?php echo $result['uname']?><h5> <li>

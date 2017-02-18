@@ -30,7 +30,7 @@ $msg="";
       }
       //setcookie("uid",mysql_result($result, 0,'uid'),$exp_time);
     
-        $_SESSION['uid'] = $result['uid'];
+        $_SESSION['id'] = $result['id'];
         header("Location: dashboard.php");
     }
 }

@@ -12,10 +12,12 @@ else
 {
 	$total = $_COOKIE['total'];
 	$cart = $_COOKIE['cart'];
+	$oid = $_COOKIE['oid'];
 }
 $mid = $_GET['mid'];
 $qty = $_GET['qty'];
 $action = $_GET['action'];
+
 
 $referer = basename($_SERVER['HTTP_REFERER']);
 switch($_GET['action'])
@@ -24,22 +26,25 @@ switch($_GET['action'])
 	{		
 		
 		$cart[$qty]=$mid;
-		$result = $db->query("SELECT tprice FROM menu WHERE mid = ':value'",['value'=>$mid])->fetch();
-		$total+=$result['tprice']*$qty;
+		$result = $db->query("SELECT amount FROM item WHERE id = ':value'",['value'=>$mid])->fetch();
+		$tot=$result['amount']*$qty;
+		$amount=$result['amount'];
+		$total+=$result['amount']*$qty;
+		$result = $db->insert('item_order',['order_id'=>$oid,'item_id'=>$mid, 'amount'=>$amount, 'quantity'=>$qty, 'total_amount'=>$tot]);
 		setcookie("cart['$qty']",$mid);
 		setcookie("total",$total);	
-
-		
 		break;
 	}
 	case "delete":
 	{	
 		$mid=$_GET['mid'];
-		
 		$total = $_COOKIE['total'];
-		$result = $db->query("SELECT tprice FROM menu WHERE mid = ':value'",['value'=>$mid])->fetch();	
-		$total-=$result['tprice']*$qty;
-		setcookie("cart['$qty']","",time()-3600);
+		$result = $db->query("SELECT * FROM item_order WHERE id = ':value' AND item_id=':value2'",['value'=>$oid, 'value2'=>$mid])->fetch();	
+		echo $total;
+		echo $result;
+		$total-=$result['total_amount']*$qty;
+		echo $total;
+		$result = $db->delete('item_order'," item_id=$mid && order_id=$oid ");
 		setcookie("total",$total);	
 		
 	}

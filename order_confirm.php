@@ -18,6 +18,8 @@
             {
               $total=$_COOKIE['total'];
               $cart =$_COOKIE['cart'];
+              $oid=$_COOKIE['oid'];
+              
 ?>
 <div class="table-responsive">
         <table class="table table-hover table-striped">
@@ -25,7 +27,8 @@
             <tr>
               <th>Name</th>
                 <th>Quantity</th>
-                  <th>Price</th>
+                  <th>Amount</th>
+                  <th> Total Amount</th>
                     <th></th>
             </tr>
           </thead>
@@ -33,15 +36,23 @@
 
 
 <?php
-	            foreach($cart as $qty=>$mid)
+              $result_array = $db->query("SELECT * FROM item_order WHERE order_id = ':value'",['value'=>$oid])->fetch_all();
+
+	            foreach($result_array as $result_array)
 	             {
-		              $result = $db->query("SELECT tprice,food_name FROM menu WHERE mid = ':value'",['value'=>$mid])->fetch();
+
+                  
+                  $mid=$result_array['item_id'];
+
+		              $result = $db->query("SELECT * FROM item WHERE id = ':value'",['value'=>$mid])->fetch();
              
             ?>
             <tr>
-              <td><?php echo $result['food_name'];?></td>
-                <td><?php echo trim($qty,"'"); ?></td>
-                  <td><?php echo $result['tprice'];?></td>
+              <td><?php echo $result['item_name'];?></td>
+                <td><?php echo $result_array['quantity'];?></td>
+                <td><?php echo $result['amount'];?></td>
+                <td><?php echo $result_array['total_amount']?></td>
+                  <td></td>
                   <td>  <a class="delete" href="cart.php?action=delete&mid=<?php echo $mid?>&qty=<?php echo trim($qty,"'")?>" ><input type="submit" class="btn btn-primary" value="Delete Product"></a>
                   </td>
                   <?php } ?>
@@ -50,7 +61,7 @@
         </table>
      
         <div>
-          <h2>Total:  <?php echo $total;?></h2>
+          <h2> Grand Total:  <?php echo $total;?></h2>
           <input type="submit" class="btn btn-primary btn-lg" value="Confirm"> &nbsp <?php echo $msg;?>  
         </div>
             <?php   
