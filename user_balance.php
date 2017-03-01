@@ -28,13 +28,31 @@ $msg="";
 							if(!empty($_POST['uid']))
 							{	
 								$uid=$_POST['uid'];
-								$result = $db->query("SELECT balance FROM users WHERE id = ':value'",['value'=>$uid])->fetch();
+								$credit=0;
+
+            $debit=0;
+                     $result_array1 = $db->query("SELECT * FROM transaction WHERE user_id = ':uid'",['uid'=>$uid])->fetch_all();
+  
+                foreach ($result_array1 as $result_array1)
+                 {
+                    if ($result_array1['type']=="debit")
+                    {
+                    $debit += $result_array1['amount'];
+                    
+                   }
+                 
+                 else
+                 {
+                     $credit += $result_array1['amount'];
+                 }
+               }
+               $balance = $credit-$debit;
 								if(!empty($result))
 								{
 								?>	
 									<br>
 									<br>
-									<h2>Balance: <?php echo $result['balance'];?> </h2>
+									<h2>Balance: <?php echo $balance;?> </h2>
 									 <a href="new_order.php?uid=<?php echo $uid?>"> <input type="submit" class="btn btn-primary" value="Take Order"></a>
 
 								<?php	

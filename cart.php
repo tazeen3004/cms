@@ -4,52 +4,51 @@ include_once('Database.php');
 $db = new Database(DB_SERVER,DB_USER,DB_PASS,DB_DATABASE);
 ?>
 <?php
-if(!isset($_COOKIE['cart']) && !isset($_COOKIE['total']))
+if(!isset($_COOKIE['total']))
 {
 $total=0;
 }
 else
 {
 	$total = $_COOKIE['total'];
-	$cart = $_COOKIE['cart'];
-	$oid = $_COOKIE['oid'];
+	
 }
 $mid = $_GET['mid'];
-$qty = $_GET['qty'];
+
 $action = $_GET['action'];
-
-
+$oid = $_COOKIE['oid'];
 $referer = basename($_SERVER['HTTP_REFERER']);
+
 switch($_GET['action'])
 {
 	case "add":
 	{		
-		
-		$cart[$qty]=$mid;
+		$qty = $_GET['qty'];		
 		$result = $db->query("SELECT amount FROM item WHERE id = ':value'",['value'=>$mid])->fetch();
 		$tot=$result['amount']*$qty;
 		$amount=$result['amount'];
 		$total+=$result['amount']*$qty;
 		$result = $db->insert('item_order',['order_id'=>$oid,'item_id'=>$mid, 'amount'=>$amount, 'quantity'=>$qty, 'total_amount'=>$tot]);
-		setcookie("cart['$qty']",$mid);
 		setcookie("total",$total);	
+		setcookie("cart['$mid']",$result);
 		break;
 	}
 	case "delete":
 	{	
-		$mid=$_GET['mid'];
 		$total = $_COOKIE['total'];
-		$result = $db->query("SELECT * FROM item_order WHERE id = ':value' AND item_id=':value2'",['value'=>$oid, 'value2'=>$mid])->fetch();	
-		echo $total;
-		echo $result;
-		$total-=$result['total_amount']*$qty;
-		echo $total;
+		$cart=$_COOKIE['cart'];
+		$result=$cart["'".$mid."'"];
+		$result1 = $db->query("SELECT total_amount FROM item_order WHERE id = ':value'",['value'=>$result])->fetch();
+		$total-=$result1['total_amount'];		
 		$result = $db->delete('item_order'," item_id=$mid && order_id=$oid ");
-		setcookie("total",$total);	
+		setcookie("total",$total);
+		setcookie("cart['$mid']","",time()-3600);	
+
 		
 	}
 	
 }
+	
 exit("<script>location.href='$referer'</script>");
 
 

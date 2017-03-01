@@ -13,13 +13,16 @@
       </div>
       
             <?php
+            $uid=$_GET['uid'];
+            
             $msg="";
-            if(isset($_COOKIE['cart']) && isset($_COOKIE['total']))
+           
+            if(isset($_COOKIE['total']) && isset($_COOKIE['oid']))
             {
               $total=$_COOKIE['total'];
-              $cart =$_COOKIE['cart'];
-              $oid=$_COOKIE['oid'];
               
+              $oid=$_COOKIE['oid'];
+             
 ?>
 <div class="table-responsive">
         <table class="table table-hover table-striped">
@@ -43,7 +46,6 @@
 
                   
                   $mid=$result_array['item_id'];
-
 		              $result = $db->query("SELECT * FROM item WHERE id = ':value'",['value'=>$mid])->fetch();
              
             ?>
@@ -53,17 +55,20 @@
                 <td><?php echo $result['amount'];?></td>
                 <td><?php echo $result_array['total_amount']?></td>
                   <td></td>
-                  <td>  <a class="delete" href="cart.php?action=delete&mid=<?php echo $mid?>&qty=<?php echo trim($qty,"'")?>" ><input type="submit" class="btn btn-primary" value="Delete Product"></a>
+                  <td>  <a class="delete" href="cart.php?action=delete&mid=<?php echo $mid?>" ><input type="submit" class="btn btn-primary" value="Delete Product"></a>
                   </td>
                   <?php } ?>
             </tr>
           </tbody>
         </table>
-     
+                            
+
         <div>
           <h2> Grand Total:  <?php echo $total;?></h2>
-          <input type="submit" class="btn btn-primary btn-lg" value="Confirm"> &nbsp <?php echo $msg;?>  
+          <a class="confirm" href="conf.php?uid=<?php echo $uid?>" ><input type="submit" class="btn btn-primary" value="COnfirm"></a>
+                  
         </div>
+    
             <?php   
         
         }

@@ -12,8 +12,10 @@ require_once("header.php")
             </div>
         </div>
         <?php
-            $uid =$_SESSION['uid'];
-            $result_array = $db->query("SELECT * FROM orders WHERE uid = ':uid'",['uid'=>$uid])->fetch_all();
+            $uid =$_SESSION['id'];
+echo $uid;
+            $result_array = $db->query("SELECT * FROM orders WHERE user_id = ':uid'",['uid'=>$uid])->fetch_all();
+
         ?>
         <div class="row">
             <div class="col-lg-5">
@@ -28,6 +30,7 @@ require_once("header.php")
                                     <tr>
                                         <th>Order #</th>
                                         <th>Order Date</th>
+                                        <th>Item Name</th>
                                         <th>Amount</th>
                                     </tr>
                                 </thead>
@@ -36,14 +39,26 @@ require_once("header.php")
                                         $total=0; 
                                         foreach ($result_array as $result_array) 
                                             {
-                                                $total +=  $result_array['amount']; 
+  
+
+                                                $oid=$result_array['id'];
+                                                $result_array1 = $db->query("SELECT * FROM item_order WHERE order_id = ':oid'",['oid'=>$oid])->fetch_all();
+                                                foreach ($result_array1 as $result_array1)
+                                                 {
+                                           
+                                                $iid=$result_array1['item_id'];
+                                                $result2 = $db->query("SELECT * FROM item WHERE id = ':iid'",['iid'=>$iid])->fetch();
+
+                                                 
                                     ?>
                                     <tr>
-                                        <td><?php echo $result_array['oid'];?></td>
-                                        <td><?php echo $result_array['date']?></td>
-                                        <td><?php echo $result_array['amount']?></td>                                                          
+                                        <td><?php echo $oid;?></td>
+                                        <td><?php echo $result_array['order_ts']?></td>
+                                        <td><?php echo $result2['item_name'];?></td>
+                                        <td><?php echo $result_array1['total_amount']?></td>                                                          
                                     </tr>
                                     <?php
+                                }
                                         }
                                     ?>
                                 </tbody>
@@ -85,7 +100,38 @@ require_once("header.php")
                     </div>
                 </div>
             </div>
+
         </div>
+        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction#</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        
+                                                $result_array3 = $db->query("SELECT * FROM transaction WHERE user_id = ':uid'",['uid'=>$uid])->fetch_all();
+                                                foreach ($result_array3 as $result_array3)
+                                                 {   
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $result_array3['id'];?></td>
+                                        <td><?php echo $result_array3['transaction_ts']?></td>
+                                        <td><?php echo $result_array3['type'];?></td>
+                                        <td><?php echo $result_array3['amount']?></td>                                                          
+                                    </tr>
+                                    <?php
+                                }
+                                        
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
     </div>
 </div>    
 <?php
