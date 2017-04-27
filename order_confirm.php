@@ -3,7 +3,6 @@
 ?>
 <div id="page-wrapper">
   <div class="container-fluid">
-    <div id="page-wrapper">
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">
@@ -65,7 +64,7 @@
 
         <div>
           <h2> Grand Total:  <?php echo $total;?></h2>
-          <a class="confirm" href="conf.php?uid=<?php echo $uid?>" ><input type="submit" class="btn btn-primary" value="COnfirm"></a>
+          <a class="confirm" href="conf.php?uid=<?php echo $uid?>" ><input type="submit" class="btn btn-primary" value="Confirm"></a>
                   
         </div>
     

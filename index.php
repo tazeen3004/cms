@@ -51,15 +51,20 @@ $msg="";
                 </div>
                 <!-- /.row -->
 				<div class="jumbotron">
-					<form action="index.php" method="POST">
+				
+					<form id="contactForm" data-toggle="validator" action="index.php" method="POST" >
   					<div class="form-group">
+					
        				<label for="contact" style="font-size:21px;">Mobile No</label>
-  					<input type="contact" class="form-control" name="contact" placeholder="Mobile No"    >
-  					</div>
+  					<input type="tel" class="form-control" name="contact" placeholder="Mobile No" data-error="Bruh, that mobile no is invalid" required>
+					<div class="help-block with-errors"></div>
+					</div>
+					
   					<div class="form-group">
     				<label for="exampleInputPassword1" style="font-size:21px;">Password</label>
-    				<input type="password" class="form-control" name="password" placeholder="Password">
+    				<input type="password" class="form-control" name="password" placeholder="Password" data-error="Bruh, that mobile no is invalid" required>
   					</div>
+				
   					<div class="etc-login-form">
 					<p>forgot your password? <a href="forgot_password.php">click here</a></p>
 				
@@ -67,10 +72,11 @@ $msg="";
 						<input type="checkbox" id="lg_remember" name="lg_remember" value="1">
 						<label for="lg_remember" style="font-size:21px;">Remember me</label>
 					</div>
-  </form>
+					<div class="form-group">
 					<input type="submit" class="btn btn-primary btn-lg" value="Sign in">
+					</div>
                 </div>
-
+				</form>
             </div>
             <!-- /.container-fluid -->
 
@@ -79,7 +85,6 @@ $msg="";
 
     </div>
     <!-- /#wrapper -->
-
 
 
 

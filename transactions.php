@@ -13,15 +13,16 @@ require_once("header.php")
         </div>
         <?php
             $uid =$_SESSION['id'];
-echo $uid;
             $result_array = $db->query("SELECT * FROM orders WHERE user_id = ':uid'",['uid'=>$uid])->fetch_all();
 
         ?>
+		<br>
+		
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions </h3>
+                        <h3 class="panel-title"><i class="fa fa-file fa-fw"></i> Order History </h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -42,6 +43,7 @@ echo $uid;
   
 
                                                 $oid=$result_array['id'];
+												
                                                 $result_array1 = $db->query("SELECT * FROM item_order WHERE order_id = ':oid'",['oid'=>$oid])->fetch_all();
                                                 foreach ($result_array1 as $result_array1)
                                                  {
@@ -67,41 +69,13 @@ echo $uid;
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="panel panel-default">
+         
+		<div class="col-lg-6">
+       <div class="panel panel-default">
                     <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Expenditure</h3>
+                     <a href="gr_customer.php">   <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions </h3></a>
                     </div>
                     <div class="panel-body">
-                        <div class="list-group">
-                            <label class="list-group-item">
-                                <span class="badge">₹ <?php echo "3232" ?></span>
-                                 Today 
-                            </label>
-                        </div>
-                        <div class="list-group">
-                            <label class="list-group-item">
-                                <span class="badge">₹ <?php echo "3232" ?></span>
-                                 This week
-                            </label>
-                        </div>
-                        <div class="list-group">
-                            <label class="list-group-item">
-                                <span class="badge">₹ <?php echo "3232" ?></span>
-                                 This Month
-                            </label>
-                        </div>
-                        <div class="list-group">
-                            <label class="list-group-item">
-                                <span class="badge">₹ <?php echo $total; ?></span>
-                                 Overall
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
@@ -133,6 +107,9 @@ echo $uid;
                             </table>
                         </div>
     </div>
+	  </div>
+	  </div>
+	 
 </div>    
 <?php
 require_once("footer.php")

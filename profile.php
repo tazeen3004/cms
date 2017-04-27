@@ -3,8 +3,8 @@ require_once("header.php");
 ?>
 
 <?php
-	$uid=$_SESSION['uid'];
-	    $result = $db->query("SELECT * FROM users WHERE uid = ':uid'",['uid'=>$uid])->fetch();
+	$uid=$_SESSION['id'];
+	    $result = $db->query("SELECT * FROM users WHERE id = ':uid'",['uid'=>$uid])->fetch();
 ?>
 <div id="page-wrapper">
     <div class="container-fluid">

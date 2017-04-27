@@ -12,7 +12,8 @@ require_once("header.php")
                     </div>
                 </div>
         <?php
-            $uid =$_SESSION['uid'];
+            $uid =$_SESSION['id'];
+            
             $result_array = $db->query("SELECT * FROM inventory")->fetch_all();
         ?>
 				  <div>
@@ -21,10 +22,10 @@ require_once("header.php")
                             <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Name</th>
                                         <th>Quantity available</th>
-                                        <th>Quantity used</th>
-                                        <th>Price</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -33,14 +34,30 @@ require_once("header.php")
                                         
                                         foreach ($result_array as $result_array) 
                                             {
-                                                
+                                                $bought=0;
+                                                $consumed=0;
+                                                $qty_available=12;   
+                                              $result_array1 = $db->query("SELECT * FROM inventory_log WHERE inventory_id = ':value'",['value'=>$result_array['id']])->fetch_all();
+                                              foreach ($result_array1 as $result_array1) 
+                                              {
+                                                    if ($result_array1['type']=='bought')
+                                                    {
+                                                        $bought += $result_array1['quantity'];
+                                                    }    
+                                                    else
+                                                    {
+                                                        $consumed +=$result_array1['quantity'];
+                                                    }
+                                                    $qty_available = $bought-$consumed;
+                                              }
                                     ?>
                                     <tr>
-                                        <td><?php echo $result_array['iname'];?></td>
-                                        <td><?php echo $result_array['qty_avail'];?></td>
-                                        <td><?php echo $result_array['qty_used'];?></td>
-                                        <td><?php echo $result_array['price'];?></td>
-                                        <td><a class="delete" href="delete.php?iid=<?php echo $result_array['iid']?>"> <input type="submit" class="btn btn-primary" value="Delete Product"></a>
+                                        <td><?php echo $result_array['id'];?></td>
+                                        <td><?php echo $result_array['inventory_name'];?></td>
+                                        <td><?php echo $qty_available;?></td>
+                                         <td><a class="update" href="inventory_update.php?id=<?php echo $result_array['id']?>"> <input type="submit" class="btn btn-primary" value="Update"></a>
+        </td>
+                                        <td><a class="delete" href="delete.php?value=0&id=<?php echo $result_array['id']?>"> <input type="submit" class="btn btn-primary" value="Delete"></a>
         </td>
                                     </tr>
                                     <?php
@@ -49,6 +66,8 @@ require_once("header.php")
                                 </tbody>
                             </table>
                             <a href="add_item.php"><input type="submit" class="btn btn-primary btn-lg" value="Add"> </a>
+                            <a href="inventory_log.php"><input type="submit" class="btn btn-primary btn-lg" value="View log"> </a>
+
                         </div>
                     </div>
                 </div>

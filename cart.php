@@ -23,7 +23,7 @@ switch($_GET['action'])
 {
 	case "add":
 	{		
-		$qty = $_GET['qty'];		
+		$qty = 1;		
 		$result = $db->query("SELECT amount FROM item WHERE id = ':value'",['value'=>$mid])->fetch();
 		$tot=$result['amount']*$qty;
 		$amount=$result['amount'];

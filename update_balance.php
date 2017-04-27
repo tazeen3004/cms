@@ -1,6 +1,17 @@
 <?php
 require_once("header.php");
 ?>
+<head>
+<script>
+function actives(){
+var click = document.getElementById('click');
+if(click.value == 'Change'){
+swal("Successful !", "Recharge is DONE !", "success")
+}
+}
+</script>
+</head>
+
 <?php
 $msg="";
 if (isset($_POST['contact']) && isset($_POST['amt']) )
@@ -12,8 +23,10 @@ if (isset($_POST['contact']) && isset($_POST['amt']) )
 		$result = $db->query("SELECT * FROM users WHERE contact = ':value'",['value'=>$contact])->fetch();
 		if(!empty($result))
 		{
-			$total_bal = $amt + $result['balance'];
-			$result = $db->update('users',['balance'=>$total_bal]," contact = $contact");
+			$cid=$result['id'];
+            $result = $db->insert('transaction',['amount'=>$amt,'type'=>'credit', 'user_id'=>$cid]);
+            echo $result;
+
 			$msg ="Balance successfully updated";
 
 		}
@@ -36,7 +49,7 @@ if (isset($_POST['contact']) && isset($_POST['amt']) )
             	<div class="row">
             		<div class="col-lg-12">
                         <h1 class="page-header">
-                            Change Card 
+                            Recharge Card 
                         </h1> 
                     </div>
                 </div>
@@ -50,7 +63,7 @@ if (isset($_POST['contact']) && isset($_POST['amt']) )
        						<label for="amt" style="font-size:21px;"> Enter Amount</label>
   							<input type="amt" class="form-control" name="amt" placeholder="Amount" >
   						</div>
-  						<input type="submit" class="btn btn-primary btn-lg" value="Change"> &nbsp <?php echo $msg;?>	
+  						<input type="submit" id="click" class="btn btn-primary btn-lg" value="Change" onmousedown="actives()"> &nbsp <?php echo $msg;?>	
   					</form>	
                 </div>
      	</div>

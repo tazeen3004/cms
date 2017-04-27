@@ -2,48 +2,35 @@
 <?php
 require_once("header.php");
 ?>
+<script>
+$('#myform').validator()
+</script>
 <?php
-$msg="";	 
+$msg="Employee Added";	 
 	
-   if(isset($_POST['submit']))
-	{
-		
-		$connect=mysqli_connect("localhost","root");
-		$uname=mysqli_real_escape_string($connect,$_POST['uname']);
-		$email=mysqli_real_escape_string($connect,$_POST['email']);
-		$mobile=mysqli_real_escape_string($connect,$_POST['mobile']);
-		$password=mysqli_real_escape_string($connect,$_POST['password']);
-		$confirmpassword=mysqli_real_escape_string($connect,$_POST['confirmpassword']);
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if (empty($_POST["uname"])) {
-    $nameErr = "Name is required";
+   if (isset($_POST['name'])&& isset($_POST['contact']) && isset($_POST['password']) && isset($_POST['cpassword']) && isset($_POST['utype']) )
+ {
+ 	$uname= $_POST['name'];
+	$contact= $_POST['contact'];
+	$password = $_POST['password'];
+  $cpassword = $_POST['cpassword'];
+  $utype = $_POST['utype'];
+  $cardno = $_POST['cardno'];
+ 	if( !empty($_POST['name']) && !empty($_POST['contact']) && !empty($_POST['password']) && !empty($_POST['cpassword']) && !empty($_POST['utype']))
+  	{
+      if ($password == $cpassword)
+      {
+		    $result = $db->insert('users',['uname'=>$uname,'contact'=>$contact, 'password'=>$password, 'utype'=>$utype]);
+    	 header("Location: dashboard.php");
+      }
+      else
+      {
+
   }
+    }
 
-	if (empty($_POST["email"])) {
-		$emailErr = "Email is required";
-	} 
-
-	if (empty($_POST["mobile"])) {
-		$mobileErr = "Mobile no required";
-	}
-	if (empty($_POST["password"])) {
-    $passErr = "Password required";
-	} 
-
-	if ($_POST['password']!= $_POST['confirmpassword']) {
-		$conErr= "Error... Passwords do not match";
-	}
- 
-  
 }
-		mysqli_select_db($connect,"cms") or die("error");
-		if(!empty($_POST['uname'])&&!empty($_POST['email'])&&!empty($_POST['mobile'])&&!empty($_POST['password'])&& $_POST['password']!= $_POST['confirmpassword'])
-		{
-		mysqli_query($connect,"UPDATE users SET uname='$uname', email='$email', contact='$mobile', password='$password' WHERE uid='$uid'");
-		header("Location:profile.php");
-		}
-		mysqli_close($connect);	
-}
+
 
 
 
@@ -60,31 +47,37 @@ $msg="";
                         </h1> 
                     </div>
                 </div>
-				<div class="jumbotron">
-					<form action="index.php" method="POST">
+					<div class="jumbotron">
+					<form data-toggle="validator" role="form" action="add_employee.php" method="POST">
   						<div class="form-group">
-       						<label for="name" style="font-size:21px;"> Full Name</label>
-  							<input type="name" class="form-control" name="name" placeholder="Full name"    >
+       						<label for="inputName" class="control-label"  style="font-size:21px;"> Name</label>
+  							<input type="text" class="form-control" name="name" placeholder="name", required>
   						</div>
   						<div class="form-group">
-       						<label for="contact" style="font-size:21px;">Mobile No</label>
-  							<input type="contact" class="form-control" name="contact" placeholder="Mobile No"    >
+       						<label for="quantity" style="font-size:21px;">Mobile No</label>
+  							<input type="contact" class="form-control" name="contact" placeholder="mobile no", required>
   						</div>
-  						<div class="form-group">
-       						<label for="contact" style="font-size:21px;">Salary</label>
-  							<input type="contact" class="form-control" name="salary" placeholder="Salary"    >
-  						</div>
-  						<div class="form-group">
-       						<label for="contact" style="font-size:21px;">Password</label>
-  							<input type="contact" class="form-control" name="password" placeholder="Password"    >
-  						</div>
-  						
+              <div class="form-group">
+            <label for="exampleInputPassword1" style="font-size:21px;">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password", required>
+            </div>
+            <div class="form-group">
+            <label for="exampleInputPassword1" style="font-size:21px;">Confirm Password</label>
+            <input type="password" class="form-control" name="cpassword" placeholder=" Confirm Password", required>
+            </div>
+
+            <div class="form-group">
+            <label for="exampleInputPassword1" style="font-size:21px;">User Type</label>
+            <input type="type" class="form-control" name="utype" placeholder="type", required>
+            </div>
+
+
+
+  					<input type="submit" class="btn btn-primary btn-lg" value="Add Customer">
   					</form>
-					<input type="submit" class="btn btn-primary btn-lg" value="Add">
+
                 </div>
-
-
-
+     	</div>
 
 
 

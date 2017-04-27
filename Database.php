@@ -34,7 +34,7 @@ class Database {
 	/**
      * @uses Enable or Disable Debug Mode
      */
-	public $debug = false;
+	public $debug = true;
     
     /**
      * @uses Set to true to print the query executed

@@ -12,8 +12,8 @@ require_once("header.php")
             </div>
         </div>
 <?php
-	$uid =$_SESSION['uid'];
-    $result = $db->findByCol('users','uid',$uid);
+	$uid =$_SESSION['id'];
+    $result = $db->findByCol('users','id',$uid);
    ?>
    <div class="col-lg-3 col-md-6">
         <div class="panel panel-green">
@@ -23,12 +23,12 @@ require_once("header.php")
                          <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?php echo $result['balance']?></div>
+                        <div class="huge"></div>
                             <div>Balance</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="update_balance.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">Recharge now</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -8,6 +8,7 @@ $db = new Database(DB_SERVER,DB_USER,DB_PASS,DB_DATABASE);
 $uid=$_GET['uid'];
 $credit=0;
 $total=$_COOKIE['total'];
+$oid=$_COOKIE['oid'];
             $debit=0;
                      $result_array1 = $db->query("SELECT * FROM transaction WHERE user_id = ':uid'",['uid'=>$uid])->fetch_all();
   
@@ -37,8 +38,12 @@ $total=$_COOKIE['total'];
                 $result = $db->insert('transaction',['amount'=>$total,'type'=>'debit', 'user_id'=>$uid]);
 
                }
-
-              setcookie("cart['$mid']","",time()-3600);
+       $cart =$_COOKIE['cart'];
+foreach($cart as $mid => $qty)
+        {
+    setcookie("cart['$mid']","",time()-3600);
+}
               setcookie("total","",time()-3600);
-          
+              setcookie("oid","",time()-3600);
+			   header("Location: user_balance.php");
             ?>

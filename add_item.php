@@ -9,10 +9,16 @@ $msg="";
  	$iname= $_POST['name'];
 	$qty_avail = $_POST['qty_avail'];
 	$price = $_POST['price'];  
+  
+
  	if( !empty($_POST['name']) && !empty($_POST['qty_avail']) && !empty($_POST['price']))
   	{
-		$result = $db->insert('inventory',['iname'=>$iname,'qty_avail'=>$qty_avail, 'price'=>$price]);
-    	header("Location: inventory.php");
+      
+
+		$result = $db->insert('inventory',['inventory_name'=>$iname]);
+		$result1 = $db->insert('inventory_log',['inventory_id'=>$result, 'type'=>'bought','amount'=>$price, 'quantity'=>$qty_avail]);
+    	
+      header("Location: inventory.php");
     }
 	else
 	{

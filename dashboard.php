@@ -18,25 +18,30 @@ require_once("header.php")
 	if($result['utype'] ==0)
 	{
         
-?><div class="row">
-                    <div class="col-lg-3 col-md-6">
-                         <a href="add_emp.php">
+?>
+    <div class="row">              
+   <div class="col-lg-3 col-md-6">
+                        <a href="add_employee.php">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-plus fa-4x"></i>
+                                        <i class="fa fa-trash fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">ADD</div>
-                                        <div>New Employee</div> 
+                                        <div class="huge">Add</div>
+                                        <div>Employee</div>
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
-                        </a>
                     </div>
+    
+    
+    
                     <div class="col-lg-3 col-md-6">
+                        <a href="delete_employee.php">
                         <div class="panel panel-red">
                             <div class="panel-heading">
                                 <div class="row">
@@ -49,16 +54,17 @@ require_once("header.php")
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
                             </a>
                         </div>
                     </div>
+        
                     <div class="col-lg-3 col-md-6">
+                        <a href="check_attendance.php">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-user fa-4x"></i>
+                                        <i class="fa fa-list fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">Check</div>
@@ -66,59 +72,31 @@ require_once("header.php")
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                           
                             </a>
                         </div>
                     </div> 
                     <div class="col-lg-3 col-md-6">
+                        <a href="all_customers.php">
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-inr fa-4x"></i>
+                                        <i class="fa fa-user fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Update</div>
-                                        <div>Salary</div>
+                                        <div class="huge">Customer</div>
+                                        <div>Details</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                           
                             </a>
                         </div>
                     </div> 
-                </div>
-    &nbsp;
-    <div class="row">
-        <a href="#"> <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-bar-chart fa-4x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">Today's</div>
-                                        <div>Sales</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            </div> </a>
-    
-    </div>
-					 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Sales Chart</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-area-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>              
+   
+ 
+					     
 <?php					
 	}
 	else
@@ -126,60 +104,85 @@ require_once("header.php")
 		if($result['utype'] ==1)
 		{
             ?>     
-                 <div class="col-lg-3 col-md-6">
-                        <div button type="button" class="btn btn-lg btn-success">
+                  
+        <div class="row">            
+        
+                    <div class="col-lg-3 col-md-6">
+                        <a href="attendance.php">
+                        <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-pencil fa-3x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right" link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-                                        <div class="huge">Update</div>
-                                        <div>Menu</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                            </a>
-                        </div>
-                    </div>
-                
-                 <div class="col-lg-4 col-md-6">
-                        <div button type="button" class="btn btn-lg btn-info">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="glyphicon glyphicon-hourglass fa-3x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right" link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-                                        <div class="huge">Employee</div>
-                                        <div>Work Time</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                            </a>
-                        </div>
-                    </div>
-                
-                 <div class="col-lg-4 col-md-6">
-                        <div button type="button" class="btn btn-lg btn-warning">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-calendar fa-3x"></i>
+                                        <i class="glyphicon glyphicon-calendar fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Employee</div>
+                                        <div class="huge">Mark</div>
                                         <div>Attendance</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
                             </a>
                         </div>
-                    </div>
-                
+                    </div> 
+            
+              <div class="col-lg-3 col-md-6">
+                        <a href="add_customer.php">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="glyphicon glyphicon-plus fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Add</div>
+                                        <div>Customer</div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </div>
+           
+    
+           
+                    <div class="col-lg-3 col-md-6">
+                        <a href="delete_customer.php">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="glyphicon glyphicon-remove fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Block</div>
+                                        <div>Customer</div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="update_balance.php">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-inr fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Recharge</div>
+                                        <div>Card</div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+						</div>
+   
+   
+                <!-- /.row -->
+
                 
 <?php					
 
@@ -189,94 +192,95 @@ require_once("header.php")
 			if($result['utype'] ==2)
 			{
             ?>
-                <div class="row"> 
-    <div class="col-lg-3 col-md-6">
-                      &nbsp;  <div class="panel panel-yellow">
+             <div id="page wrapper">
+			 <div id="container-fluid">
+                        <div class="col-lg-3 col-md-6">
+                             <a href="user_balance.php">
+                        <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">New order</div>
+                                        <div class="huge">Place</div>
+                                        <div>Order</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="user_balance.php">
+                           
                                 <div class="panel-footer">
-                                    <span class="pull-left">place now</span>
+                                    <span class="pull-left">Place Now</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
                             </a>
                         </div>
                     </div>
-   
-     <div class="col-lg-6">
-                        <h2>Sales</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Food item</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>/index.html</td>
-                                        <td>1265</td>
-                                        <td>32.3%</td>
-                                        <td>$321.33</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/about.html</td>
-                                        <td>261</td>
-                                        <td>33.3%</td>
-                                        <td>$234.12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/sales.html</td>
-                                        <td>665</td>
-                                        <td>21.3%</td>
-                                        <td>$16.34</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog.html</td>
-                                        <td>9516</td>
-                                        <td>89.3%</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/404.html</td>
-                                        <td>23</td>
-                                        <td>34.3%</td>
-                                        <td>$23.52</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/services.html</td>
-                                        <td>421</td>
-                                        <td>60.3%</td>
-                                        <td>$724.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog/post.html</td>
-                                        <td>1233</td>
-                                        <td>93.2%</td>
-                                        <td>$126.34</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        
+                      
+                      <div class="col-lg-3 col-md-6">
+                             <a href="individual_attendance1.php">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-list fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Check</div>
+                                        <div>Attendance</div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="panel-footer">
+                                    <span class="pull-left">View</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>  
+                   
+                    <div class="col-lg-12">
+                                         
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Attendance</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="myfirstchart"></div>
+                          
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.row -->	 
+         </div>     
+</div>				
 <?php                
 			}
 			else
 			{
+				      $balance = 0;
+                $credit = 0;
+                $debit = 0;
+                $result_array1 = $db->query("SELECT * FROM transaction WHERE user_id = ':uid'",['uid'=>$uid])->fetch_all();
+            
+                foreach ($result_array1 as $result_array1)
+                 {
+                    if ($result_array1['type']=="debit")
+                    {
+                    $debit += $result_array1['amount'];
+                    
+                   }
+                 
+                 else
+                 {
+                     $credit += $result_array1['amount'];
+                 }
+               }
+               
+               $balance = $credit-$debit;
+                             
 ?>
 				<div class="col-lg-3 col-md-6">
                         <div class="panel panel-green">
@@ -286,12 +290,12 @@ require_once("header.php")
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo $result['balance']?></div>
+                                        <div class="huge"><?php echo $balance ?></div>
                                         <div>Balance</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="recharge.php">
+                            <a href="update_balance.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">Recharge Now!</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -301,22 +305,35 @@ require_once("header.php")
 							
                         </div>
                     </div>
+                        
+                         <div  class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-bolt fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Offers</div>
+                                        <div>Today's Sale</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="offers.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                     
 					 
                                     <!-- /.row -->
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Expenditure</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-area-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
+              
+             
 
 <?php
 			}
@@ -333,7 +350,56 @@ require_once("header.php")
 
     </div>
     <!-- /#wrapper -->
+ <link href="css/plugins/morris.css" rel="stylesheet">
+ <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+	<script>
+new Morris.Line({
+  // ID of the element in which to draw the chart.
+  element: 'myfirstchart',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+  <?php
+  $result = $db->query("SELECT * FROM employees WHERE uid = ':value'",['value'=>$uid])->fetch_all();
+  ?>
+  
+  data: [
+  <?php
+ foreach ($result as $result) 
+                                            { 
+											$total_days = $db->count('employees'," uid=$uid");
+											$present_days =  $db->count('employees'," uid=$uid and attendance='1'");
+											$percentage= ($present_days/$total_days)*100;
+											$attendance=$result['attendance'];
+											$percent=($attendance/1)*100;
+											?>
+  
+  
+  
+    { year:'<?php echo $result['id'];?>', value:<?php echo $percent;?>},
+   
  
+  <?php
+	}
+	?>	
+ ],	
+  // The name of the data record attribute that contains x-values.
+  xkey: ['year'],
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['value'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  labels: ['Value']
+});
+</script>
+
 <?php
 require_once("footer.php")
 ?>
